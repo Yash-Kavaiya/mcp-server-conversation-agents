@@ -1,4 +1,3 @@
-
 from typing import Any
 import httpx
 from mcp.server.fastmcp import FastMCP
@@ -92,5 +91,8 @@ Forecast: {period['detailedForecast']}
 
 
 if __name__ == "__main__":
+    # Print startup message
+    print("MCP server starting...", flush=True)
+    
     # Initialize and run the server
     mcp.run(transport='stdio')
