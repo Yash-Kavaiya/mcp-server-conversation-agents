@@ -63,7 +63,7 @@ async def get_forecast(latitude: float, longitude: float) -> str:
         longitude: Longitude of the location
     """
     # First get the forecast grid endpoint
-    points_url = f"{NWS_API_BASE}/points/{latitude},{longitude}"
+    points_url = f"{API_BASE}/points/{latitude},{longitude}"
     points_data = await make_nws_request(points_url)
 
     if not points_data:
