@@ -1,0 +1,37 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: stdio
+
+configSchema:
+  # JSON Schema defining the configuration options for the MCP.
+  type: object
+  required:
+    - dialogflowApiKey
+  properties:
+    dialogflowApiKey:
+      type: string
+      description: The API key for the Dialogflow CX server.
+    projectId:
+      type: string
+      description: The Google Cloud project ID associated with the Dialogflow agent.
+    location:
+      type: string
+      description: The location of the Dialogflow CX agent (e.g., "us-central1").
+    agentId:
+      type: string
+      description: The ID of the Dialogflow CX agent.
+
+commandFunction:
+  # A function that produces the CLI command to start the MCP on stdio.
+  |-
+    (config) => ({
+      command: 'python',
+      args: ['mcp_server.py'],
+      env: {
+        DIALOGFLOW_API_KEY: config.dialogflowApiKey,
+        PROJECT_ID: config.projectId,
+        LOCATION: config.location,
+        AGENT_ID: config.agentId
+      }
+    })
